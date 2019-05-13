@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/inventary_navigation"
+            app:startDestination="@id/inventories_fragment">
+    <fragment android:id="@+id/products_fragment" android:name="com.partners.laboratorio7.ui.products.ProductsFragment"
+              android:label="products_fragment" tools:layout="@layout/products_fragment">
+        <action android:id="@+id/action_products_fragment_to_createProduct" app:destination="@id/createProduct"/>
+    </fragment>
+    <fragment android:id="@+id/inventories_fragment"
+              android:name="com.partners.laboratorio7.ui.inventories.InventoriesFragment"
+              android:label="inventories_fragment" tools:layout="@layout/inventories_fragment">
+        <action android:id="@+id/action_inventories_fragment_to_singleInventaryFragment"
+                app:destination="@id/singleInventaryFragment"/>
+        <action android:id="@+id/action_inventories_fragment_to_create_inventary"
+                app:destination="@id/create_inventary"/>
+    </fragment>
+    <fragment android:id="@+id/singleInventaryFragment" android:name="com.partners.laboratorio7.singleInventaryFragment"
+              android:label="single_inventary_fragment" tools:layout="@layout/single_inventary_fragment"/>
+    <fragment android:id="@+id/create_inventary" android:name="com.partners.laboratorio7.create_inventary"
+              android:label="fragment_create_inventary" tools:layout="@layout/fragment_create_inventary"/>
+    <fragment android:id="@+id/createProduct" android:name="com.partners.laboratorio7.createProduct"
+              android:label="fragment_create_product" tools:layout="@layout/fragment_create_product"/>
+</navigation>
