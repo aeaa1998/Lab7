@@ -17,6 +17,8 @@ import com.partners.laboratorio7.ui.inventories.InventoriesViewModel
 import kotlinx.android.synthetic.main.fragment_create_inventary.*
 import kotlinx.android.synthetic.main.fragment_create_inventary.view.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,6 +48,7 @@ class create_inventary : Fragment() {
     ): View? {
         val btnFab = container?.rootView?.findViewById<View>(R.id.fab)
         btnFab?.visibility = View.GONE
+        btnFab?.isClickable = false
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_create_inventary, container, false)
         val btn = v.findViewById<View>(R.id.button_send)
@@ -57,12 +60,11 @@ class create_inventary : Fragment() {
             if (name.text.isEmpty()){
                 Toast.makeText(context, "Llene le campo", Toast.LENGTH_LONG).show()
             }else{
-                viewModel.onAddRow(Inventary(arrayListOf(), name.text.toString()))
+                var formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
+                viewModel.onAddRow(Inventary(arrayListOf(), name.text.toString() + LocalDate.now().format(formatter)))
                 view?.clearFocus()
                 Toast.makeText(context, "Se ah creado el inventario", Toast.LENGTH_LONG).show()
                 NavHostFragment.findNavController(this).navigateUp()
-
-
             }
         }
         return v

@@ -48,6 +48,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_inventories_fragment_to_products_fragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_inventories_fragment_to_singleInventaryFragment">
                               <value>
                                 <LayoutPositions />
@@ -79,6 +84,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="scanCodeFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="740" />
+                            <option name="y" value="10" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="singleInventaryFragment">
                     <value>
                       <LayoutPositions>
@@ -87,6 +104,15 @@
                             <option name="x" value="500" />
                             <option name="y" value="12" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_singleInventaryFragment_to_scanCodeFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

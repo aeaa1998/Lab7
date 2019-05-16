@@ -1,5 +1,6 @@
 package com.partners.laboratorio7.ui.products
 
+import android.opengl.Visibility
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -77,6 +78,8 @@ class ProductsFragment : Fragment() {
 //            val binding = DataBindingUtil.inflate<RecyclerRowBinding>(layoutInflater, R.layout.recycler_row, p0, false)
 //            binding.product = ProductBinding(row.getProduct().getName(), row.getQuantity())
             val cellForRow = layoutInflater.inflate(R.layout.multiple_inventaries_row, parent, false)
+            cellForRow.findViewById<View>(R.id.inventary_button).isClickable = false
+            cellForRow.findViewById<View>(R.id.inventary_button).visibility = View.GONE
 
             return CustomViewHolder(cellForRow)
 

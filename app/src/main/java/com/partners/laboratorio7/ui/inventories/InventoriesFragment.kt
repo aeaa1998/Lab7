@@ -8,12 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.NavAction
+import androidx.navigation.NavArgs
+import androidx.navigation.NavHost
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.partners.laboratorio7.Adapters.ViewHolder.CustomViewHolder
+import com.partners.laboratorio7.App.Companion.indexInventary
 import com.partners.laboratorio7.Models.Inventary
 import com.partners.laboratorio7.Models.Row
 import com.partners.laboratorio7.R
@@ -34,17 +38,17 @@ class InventoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val v = inflater.inflate(R.layout.inventories_fragment, container, false)
-        recycler = v.findViewById(R.id.recycler_container_inventories)as RecyclerView
+        recycler = v.findViewById(R.id.recycler_container_inventories) as RecyclerView
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = InventoriesAdapter()
         recycler.adapter?.notifyDataSetChanged()
         val btn = container?.rootView?.findViewById<View>(R.id.fab)
         btn?.visibility = View.VISIBLE
+        btn?.isClickable = true
 
 
         btn?.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_inventories_fragment_to_create_inventary)
-
         }
 
 
@@ -73,16 +77,17 @@ class InventoriesFragment : Fragment() {
         override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
             holder.view.inventary_info.text = viewModel.inventories.value?.get(position)?.name ?: ""
             holder.view.inventary_button.setOnClickListener {
-                Toast.makeText(context,"YEAHHHH", Toast.LENGTH_LONG).show()
+                indexInventary = position
+                val selected = viewModel.inventories.value?.get(position)
+                val action = InventoriesFragmentDirections.actionInventoriesFragmentToSingleInventaryFragment(selected ?: Inventary(
+                    arrayListOf(), "No ha cargado correctamente"))
+                findNavController(parentFragment!!).navigate(action)
+
             }
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, p1: Int): CustomViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val d = viewModel.inventories.value
-            val row = inventories[p1]
-//            val binding = DataBindingUtil.inflate<RecyclerRowBinding>(layoutInflater, R.layout.recycler_row, p0, false)
-//            binding.product = ProductBinding(row.getProduct().getName(), row.getQuantity())
             val cellForRow = layoutInflater.inflate(R.layout.multiple_inventaries_row, parent, false)
 
             return CustomViewHolder(cellForRow)

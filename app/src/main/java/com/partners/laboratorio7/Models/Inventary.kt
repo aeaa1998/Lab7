@@ -1,10 +1,5 @@
 package com.partners.laboratorio7.Models
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import java.io.Serializable
 
-class Inventary(
-    var rows: ArrayList<Row>,
-    var name: String
-)
+class Inventary(var rows: ArrayList<Row>, var name: String ): Serializable

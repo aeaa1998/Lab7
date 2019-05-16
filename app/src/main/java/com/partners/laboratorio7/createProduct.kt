@@ -48,6 +48,7 @@ lateinit var viewModel:ProductsViewModel
         // Inflate the layout for this fragment
         val btnFab = container?.rootView?.findViewById<View>(R.id.fab)
         btnFab?.visibility = View.GONE
+        btnFab?.isClickable = false
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_create_product, container, false)
         val btn = v.findViewById<View>(R.id.send_button)
@@ -56,15 +57,19 @@ lateinit var viewModel:ProductsViewModel
         }
 
         btn.setOnClickListener {
+            val p = Product(product_name.text.toString(),product_code.text.toString())
             if (product_name.text.isEmpty() || product_code.text.isEmpty()){
                 Toast.makeText(context, "Llene los campo", Toast.LENGTH_LONG).show()
             }else{
-                viewModel.onAddRow(Product(product_name.text.toString(),product_code.text.toString()))
-                view?.clearFocus()
-                Toast.makeText(context, "Se ah creado el producto", Toast.LENGTH_LONG).show()
-                NavHostFragment.findNavController(this).navigateUp()
-
-
+                if (viewModel.hasCode(p)){
+                    Toast.makeText(context, "Ese codigo ya existe", Toast.LENGTH_LONG).show()
+                }
+                else{
+                    viewModel.onAddRow(p)
+                    view?.clearFocus()
+                    Toast.makeText(context, "Se ah creado el producto", Toast.LENGTH_LONG).show()
+                    NavHostFragment.findNavController(this).navigateUp()
+                }
             }
         }
         return v
